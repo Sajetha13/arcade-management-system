@@ -1,4 +1,4 @@
-package com.example.arcade_system.Handler;
+package com.example.arcade_system.Exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
