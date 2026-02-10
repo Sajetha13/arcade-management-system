@@ -1,7 +1,8 @@
 package com.example.arcade_system.service;
 
 import com.example.arcade_system.model.*;
-import com.example.arcade_system.repository.*;
+import com.example.arcade_system.repository.GameRepository;
+import com.example.arcade_system.repository.ScoreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,13 +13,13 @@ import java.util.List;
 public class ScoreService {
 
     @Autowired
-    private ScoreRepo scoreRepo;
+    private ScoreRepository scoreRepo;
 
     @Autowired
-    private UserRepository userRepo; // Needed to find the User
+    private UserRepository userRepo;
 
     @Autowired
-    private GameRepo gameRepo; // Needed to find the Game
+    private GameRepository gameRepo;
 
     public Score addScore(Long userId, Long gameId, int scoreValue) {
         if (!userRepo.existsById(userId) || !gameRepo.existsById(gameId)) {

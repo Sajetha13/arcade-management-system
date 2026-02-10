@@ -1,6 +1,6 @@
 package com.example.arcade_system.service;
 
-import com.example.arcade_system.Exception.ResourceNotFoundException;
+import com.example.arcade_system.exception.ResourceNotFoundException;
 import com.example.arcade_system.model.Game;
 import com.example.arcade_system.repository.GameRepository;
 import lombok.AllArgsConstructor;

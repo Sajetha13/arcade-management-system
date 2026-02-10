@@ -1,4 +1,4 @@
-package com.example.arcade_system.Controller;
+package com.example.arcade_system.controller;
 
 import com.example.arcade_system.model.Machine;
 import org.springframework.http.HttpStatus;
