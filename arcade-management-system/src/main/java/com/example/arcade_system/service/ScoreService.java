@@ -1,6 +1,5 @@
 package com.example.arcade_system.service;
 
-import com.example.arcade_system.dto.GlobalRankDTO;
 import com.example.arcade_system.model.*;
 import com.example.arcade_system.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
