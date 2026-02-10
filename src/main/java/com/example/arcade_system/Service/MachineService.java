@@ -7,7 +7,7 @@ import com.example.arcade_system.repository.MachineRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;E
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
