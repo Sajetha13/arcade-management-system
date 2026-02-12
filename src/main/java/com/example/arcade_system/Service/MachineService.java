@@ -1,8 +1,9 @@
-package com.example.arcade_system.Service;
+package com.example.arcade_system.service;
 
 import com.example.arcade_system.Exception.MachineNotFoundException;
 import com.example.arcade_system.model.Game;
 import com.example.arcade_system.model.Machine;
+import com.example.arcade_system.repository.GameRepository;
 import com.example.arcade_system.repository.MachineRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,7 +18,6 @@ public class MachineService {
     private final MachineRepository machineRepository;
     private final GameRepository gameRepository;
 
-    @Override
     public Machine addMachine(Long gameId, Machine machine) {
 
         Game game = gameRepository.findById(gameId)
@@ -31,12 +31,10 @@ public class MachineService {
         return machineRepository.save(machine);
     }
 
-    @Override
     public List<Machine> getAllMachines() {
         return machineRepository.findAll();
     }
 
-    @Override
     public Machine updateMachineStatus(Long machineId, String status) {
 
         Machine machine = machineRepository.findById(machineId)
@@ -47,7 +45,6 @@ public class MachineService {
         return machineRepository.save(machine);
     }
 
-    @Override
     public void deleteMachine(Long machineId) {
 
         Machine machine = machineRepository.findById(machineId)
