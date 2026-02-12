@@ -1,0 +1,14 @@
+package com.example.arcade_system.repository;
+
+import com.example.arcade_system.model.Score;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+import java.util.List;
+
+@Repository
+public interface ScoreRepository extends JpaRepository<Score, Long> {
+
+    List<Score> findByUserId(Long userId);
+
+    List<Score> findTop10ByGameIdOrderByScoreDesc(Long gameId);
+}

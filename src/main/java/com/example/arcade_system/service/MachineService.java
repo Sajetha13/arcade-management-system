@@ -1,6 +1,6 @@
 package com.example.arcade_system.service;
 
-import com.example.arcade_system.Exception.MachineNotFoundException;
+import com.example.arcade_system.exception.MachineNotFoundException;
 import com.example.arcade_system.model.Game;
 import com.example.arcade_system.model.Machine;
 import com.example.arcade_system.repository.GameRepository;
