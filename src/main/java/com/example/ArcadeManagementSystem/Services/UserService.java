@@ -15,13 +15,11 @@ public class UserService {
 
     private final UserRepository userRepository;
 
-    // --- REGISTRATION LOGIC ---
     public User registerUser(User user) {
         user.setCreatedAt(LocalDateTime.now());
         return userRepository.save(user);
     }
 
-    // --- ADMIN CRUD FOR PLAYERS ---
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
