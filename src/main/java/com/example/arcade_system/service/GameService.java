@@ -30,7 +30,6 @@ public class GameService {
 
 
     public void deleteGame(Long id) {
-        Game game=gameRepository.findById(id).orElseThrow(()->new ResourceNotFoundException("Game Id not exists:"+id));
         gameRepository.deleteById(id);
     }
 

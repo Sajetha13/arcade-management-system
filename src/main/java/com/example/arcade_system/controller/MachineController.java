@@ -1,5 +1,6 @@
 package com.example.arcade_system.controller;
 
+import com.example.arcade_system.service.*;
 import com.example.arcade_system.model.Machine;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -7,6 +8,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@RestController
+@RequestMapping("/machines")
 public class MachineController {
     private final MachineService MachineService;
 

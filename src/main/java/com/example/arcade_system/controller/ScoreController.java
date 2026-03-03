@@ -2,7 +2,7 @@ package com.example.arcade_system.controller;
 
 import com.example.arcade_system.model.Score;
 import com.example.arcade_system.service.ScoreService;
-import lombok.Data;
+// import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

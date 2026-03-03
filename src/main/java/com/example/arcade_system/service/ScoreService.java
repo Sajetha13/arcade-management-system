@@ -1,8 +1,8 @@
 package com.example.arcade_system.service;
 
 import com.example.arcade_system.model.*;
-import com.example.arcade_system.repository.GameRepository;
-import com.example.arcade_system.repository.ScoreRepository;
+// import com.example.arcade_system.repository.GameRepository;
+import com.example.arcade_system.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +23,7 @@ public class ScoreService {
 
     public Score addScore(Long userId, Long gameId, int scoreValue) {
         if (!userRepo.existsById(userId) || !gameRepo.existsById(gameId)) {
-            throw new RuntimeExceptiKon("User or Game ID is invalid!");
+            throw new RuntimeException("User or Game ID is invalid!");
         }
 
         Score score = new Score();

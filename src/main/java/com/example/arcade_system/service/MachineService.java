@@ -18,7 +18,6 @@ public class MachineService {
     private final MachineRepository machineRepository;
     private final GameRepository gameRepository;
 
-    @Override
     public Machine addMachine(Long gameId, Machine machine) {
 
         Game game = gameRepository.findById(gameId)
@@ -32,12 +31,10 @@ public class MachineService {
         return machineRepository.save(machine);
     }
 
-    @Override
     public List<Machine> getAllMachines() {
         return machineRepository.findAll();
     }
 
-    @Override
     public Machine updateMachineStatus(Long machineId, String status) {
 
         Machine machine = machineRepository.findById(machineId)
@@ -48,7 +45,6 @@ public class MachineService {
         return machineRepository.save(machine);
     }
 
-    @Override
     public void deleteMachine(Long machineId) {
 
         Machine machine = machineRepository.findById(machineId)
