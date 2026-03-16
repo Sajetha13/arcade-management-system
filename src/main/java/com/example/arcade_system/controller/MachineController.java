@@ -7,7 +7,9 @@ import org.springframework.web.bind.annotation.*;
 import com.example.arcade_system.service.MachineService;
 
 import java.util.List;
-
+@CrossOrigin("*")
+@RestController
+@RequestMapping("/machines")
 public class MachineController {
     private final MachineService MachineService;
 

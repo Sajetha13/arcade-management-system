@@ -18,4 +18,8 @@ public class Game {
     private String name;
 
     private Boolean active = true;
+
+    public Boolean getActive() {
+        return active;
+    }
 }

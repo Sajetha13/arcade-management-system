@@ -32,4 +32,5 @@ public class User {
         ADMIN,
         PLAYER
     }
+
 }

@@ -26,4 +26,9 @@ public class Machine {
     @ManyToOne
     @JoinColumn(name = "game_id")
     private Game game;
+
+    public LocalDateTime getInstalledAt() {
+        return installedAt;
+    }
+
 }

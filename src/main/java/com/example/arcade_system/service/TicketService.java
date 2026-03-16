@@ -14,34 +14,23 @@ public class TicketService {
     private final TicketRepository ticketRepository;
     private final UserRepository userRepository;
 
-    public TicketService(TicketRepository ticketRepository,
-                         UserRepository userRepository) {
+    public TicketService(TicketRepository ticketRepository, UserRepository userRepository) {
         this.ticketRepository = ticketRepository;
         this.userRepository = userRepository;
     }
 
     public Ticket createTicket(Long userId, Ticket ticket) {
-
-    User user = userRepository.findById(userId)
-            .orElseThrow(() -> new RuntimeException("User not found"));
-
-    if (user.getRole() != User.Role.PLAYER) {
-        throw new RuntimeException("Only players can create tickets");
-    }
-
-    ticket.setUser(user);
-    ticket.setStatus("OPEN");
-
-    return ticketRepository.save(ticket);
-}
-
-
-    public List<Ticket> getTicketsByUser(Long userId) {
-
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
-        return ticketRepository.findByUser(user);
+        if (user.getRole() != User.Role.PLAYER) {
+            throw new RuntimeException("Only players can create tickets");
+        }
+
+        ticket.setUser(user);
+        ticket.setStatus("OPEN");
+
+        return ticketRepository.save(ticket);
     }
 
     public List<Ticket> getAllTickets() {
@@ -68,4 +57,11 @@ public class TicketService {
     return ticketRepository.save(ticket);
 }
 
+    public List<Ticket> getTicketsByUser(Long userId) {
+
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        return ticketRepository.findByUser(user);
+    }
 }

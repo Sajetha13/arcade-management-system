@@ -5,7 +5,7 @@ import com.example.arcade_system.service.TicketService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/tickets")
 public class TicketController {
@@ -45,7 +45,7 @@ public class TicketController {
 
     // Update ticket status
     @PatchMapping("/{ticketId}/status")
-public Ticket updateTicketStatus(
+    public Ticket updateTicketStatus(
         @PathVariable Long ticketId,
         @RequestParam Long adminId,
         @RequestParam String status

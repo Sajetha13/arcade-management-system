@@ -26,5 +26,7 @@ public class Ticket {
 
     private String status = "OPEN";
 
+    @Column(name = "created_at", insertable = false, updatable = false)
     private LocalDateTime createdAt;
+
 }
