@@ -2,55 +2,44 @@ package com.example.arcade_system.controller;
 
 import com.example.arcade_system.model.Ticket;
 import com.example.arcade_system.service.TicketService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/tickets")
+@RequiredArgsConstructor
 public class TicketController {
 
     private final TicketService ticketService;
 
-    public TicketController(TicketService ticketService) {
-        this.ticketService = ticketService;
+    // ✅ Create ticket (PLAYER only)
+    @PostMapping
+    public Ticket createTicket(Authentication auth, @RequestBody Ticket ticket) {
+        return ticketService.createTicket(auth.getName(), ticket);
     }
 
-    // Create ticket
-    @PostMapping("/user/{userId}")
-    public Ticket createTicket(
-            @PathVariable Long userId,
-            @RequestBody Ticket ticket
-    ) {
-        return ticketService.createTicket(userId, ticket);
-    }
-
-    // View tickets of a user
-    @GetMapping("/user/{userId}")
-    public List<Ticket> getUserTickets(@PathVariable Long userId) {
-        return ticketService.getTicketsByUser(userId);
-    }
-
-    // View all tickets
+    // ✅ Get tickets (PLAYER → own, ADMIN → all)
     @GetMapping
-    public List<Ticket> getAllTickets() {
-        return ticketService.getAllTickets();
+    public List<Ticket> getTickets(Authentication auth) {
+        return ticketService.getTicketsForUser(auth.getName());
     }
 
-    // View open tickets
+    // ✅ Admin only: view open tickets
     @GetMapping("/open")
     public List<Ticket> getOpenTickets() {
         return ticketService.getOpenTickets();
     }
 
-    // Update ticket status
+    // ✅ Admin only: update ticket status
     @PatchMapping("/{ticketId}/status")
-public Ticket updateTicketStatus(
-        @PathVariable Long ticketId,
-        @RequestParam Long adminId,
-        @RequestParam String status
-) {
-    return ticketService.updateTicketStatus(adminId, ticketId, status);
-}
+    public Ticket updateTicketStatus(
+            @PathVariable Long ticketId,
+            @RequestParam String status,
+            Authentication auth) {
 
+        return ticketService.updateTicketStatus(auth.getName(), ticketId, status);
+    }
 }

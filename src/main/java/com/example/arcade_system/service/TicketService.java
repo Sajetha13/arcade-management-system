@@ -20,52 +20,54 @@ public class TicketService {
         this.userRepository = userRepository;
     }
 
-    public Ticket createTicket(Long userId, Ticket ticket) {
+    // 🔥 create ticket (logged-in user)
+    public Ticket createTicket(String username, Ticket ticket) {
 
-    User user = userRepository.findById(userId)
-            .orElseThrow(() -> new RuntimeException("User not found"));
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new RuntimeException("User not found"));
 
-    if (user.getRole() != User.Role.PLAYER) {
-        throw new RuntimeException("Only players can create tickets");
+        if (user.getRole() != User.Role.PLAYER) {
+            throw new RuntimeException("Only players can create tickets");
+        }
+
+        ticket.setUser(user);
+        ticket.setStatus("OPEN");
+
+        return ticketRepository.save(ticket);
     }
 
-    ticket.setUser(user);
-    ticket.setStatus("OPEN");
+    // 🔥 get tickets (player → own, admin → all)
+    public List<Ticket> getTicketsForUser(String username) {
 
-    return ticketRepository.save(ticket);
-}
-
-
-    public List<Ticket> getTicketsByUser(Long userId) {
-
-        User user = userRepository.findById(userId)
+        User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new RuntimeException("User not found"));
+
+        if (user.getRole() == User.Role.ADMIN) {
+            return ticketRepository.findAll();
+        }
 
         return ticketRepository.findByUser(user);
     }
 
-    public List<Ticket> getAllTickets() {
-        return ticketRepository.findAll();
-    }
-
+    // 🔥 admin only
     public List<Ticket> getOpenTickets() {
         return ticketRepository.findByStatus("OPEN");
     }
 
-    public Ticket updateTicketStatus(Long adminId, Long ticketId, String status) {
+    // 🔥 update ticket (admin only)
+    public Ticket updateTicketStatus(String username, Long ticketId, String status) {
 
-    User admin = userRepository.findById(adminId)
-            .orElseThrow(() -> new RuntimeException("User not found"));
+        User admin = userRepository.findByUsername(username)
+                .orElseThrow(() -> new RuntimeException("User not found"));
 
-    if (admin.getRole() != User.Role.ADMIN) {
-        throw new RuntimeException("Only admin can update ticket status");
+        if (admin.getRole() != User.Role.ADMIN) {
+            throw new RuntimeException("Only admin can update ticket status");
+        }
+
+        Ticket ticket = ticketRepository.findById(ticketId)
+                .orElseThrow(() -> new RuntimeException("Ticket not found"));
+
+        ticket.setStatus(status);
+        return ticketRepository.save(ticket);
     }
-
-    Ticket ticket = ticketRepository.findById(ticketId)
-            .orElseThrow(() -> new RuntimeException("Ticket not found"));
-
-    ticket.setStatus(status);
-    return ticketRepository.save(ticket);
-}
-
 }

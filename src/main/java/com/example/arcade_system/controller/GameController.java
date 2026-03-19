@@ -2,45 +2,49 @@ package com.example.arcade_system.controller;
 
 import com.example.arcade_system.model.Game;
 import com.example.arcade_system.service.GameService;
-import lombok.AllArgsConstructor;
-import org.springframework.http.HttpStatus;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/game")
-@AllArgsConstructor
-
+@RequiredArgsConstructor
 public class GameController {
 
-    private GameService gameService;
+    private final GameService gameService;
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
-    public ResponseEntity<Game> addGame(@RequestBody Game game){
-        return new ResponseEntity<>(gameService.addGame(game), HttpStatus.OK);
+    public ResponseEntity<Game> addGame(@RequestBody Game game) {
+        return ResponseEntity.ok(gameService.addGame(game));
     }
 
     @GetMapping
-    public ResponseEntity<List<Game>> getAllGames(){
-        return new ResponseEntity<>(gameService.getAllGames(),HttpStatus.OK);
+    public ResponseEntity<List<Game>> getAllGames() {
+        return ResponseEntity.ok(gameService.getAllGames());
     }
 
     @GetMapping("/{name}")
-    public ResponseEntity<Game> getGameByName(@PathVariable String name){
+    public ResponseEntity<Game> getGameByName(@PathVariable String name) {
         return ResponseEntity.ok(gameService.getGameByName(name));
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{id}")
-    public String deleteGame(@PathVariable Long id){
+    public ResponseEntity<String> deleteGame(@PathVariable Long id) {
         gameService.deleteGame(id);
-        return "Game deleted successfully";
+        return ResponseEntity.ok("Game deleted successfully");
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PatchMapping("/{id}/status")
-    public ResponseEntity<Game> updatedStatus(@PathVariable Long id,@RequestParam boolean active){
-        Game updatedGame=gameService.updatedStatus(id,active);
-        return ResponseEntity.ok(updatedGame);
+    public ResponseEntity<Game> updateStatus(
+            @PathVariable Long id,
+            @RequestParam boolean active) {
+
+        return ResponseEntity.ok(gameService.updatedStatus(id, active));
     }
 }

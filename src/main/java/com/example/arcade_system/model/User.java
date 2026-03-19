@@ -5,6 +5,8 @@ import lombok.*;
 
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "users")
 @Data
@@ -21,6 +23,10 @@ public class User {
 
     @Column(nullable = false, unique = true, length = 100)
     private String email;
+
+    @Column(nullable = false)
+    @JsonIgnore
+    private String password;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
