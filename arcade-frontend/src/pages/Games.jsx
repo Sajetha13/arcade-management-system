@@ -7,8 +7,8 @@ function Games() {
   const [games, setGames] = useState([]);
   const [newGame, setNewGame] = useState("");
 
-  // TEMP role (later from login)
-  const role = "USER";
+  const user = JSON.parse(localStorage.getItem("user"));
+  const role = user?.role || "GUEST";
 
   const fetchGames = () => {
     API.get("/game")
