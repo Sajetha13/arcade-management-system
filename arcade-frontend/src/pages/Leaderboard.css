@@ -1,0 +1,114 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+.leaderboard-outer {
+  background-color: #111;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+}
+
+/* THE FULL-SCREEN RED CABINET FRAME */
+.arcade-cabinet-frame {
+  width: 100vw;
+  height: 100vh;
+  background: #b10000; /* Deep Arcade Red */
+  border: 40px solid #1a1a1a; /* Thick outer trim */
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  /* Glowing inside edges for the "plastic" feel */
+  box-shadow: inset 0 0 100px rgba(0,0,0,0.9);
+}
+
+/* THE UNIFIED CRT SCREEN (Logo + Scores all in one) */
+.integrated-crt-screen {
+  width: 90%;
+  height: 85%;
+  background: #050505;
+  border: 15px solid #222; /* The screen bezel */
+  border-radius: 10px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px;
+  box-sizing: border-box;
+  box-shadow: inset 0 0 40px rgba(0, 255, 255, 0.1);
+}
+
+/* SCANLINES FOR THE WHOLE SCREEN */
+.integrated-crt-screen::after {
+  content: " ";
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.15) 50%),
+              linear-gradient(90deg, rgba(255, 0, 0, 0.05), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.05));
+  background-size: 100% 4px, 3px 100%;
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* THE BIG INTEGRATED LOGO */
+.big-logo-main {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 4.5rem;
+  color: #ffff00;
+  text-shadow: 6px 6px #ff00ff, 0 0 15px rgba(255, 255, 255, 0.3);
+  margin-top: 20px;
+  margin-bottom: 20px;
+  letter-spacing: 8px;
+  text-align: center;
+}
+
+.high-scores-title {
+  color: #fff;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 2.2rem;
+  margin-bottom: 40px;
+  text-shadow: 0 0 10px #fff;
+}
+
+/* DATA ROWS */
+.score-table {
+  width: 85%;
+  font-family: 'Press Start 2P', cursive;
+}
+
+.score-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 0;
+  font-size: 1.5rem;
+}
+
+/* CLASSIC COLORS */
+.rank-1 { color: #ff007f; text-shadow: 0 0 10px #ff007f; } /* Pink/Red */
+.rank-2 { color: #ff0000; }
+.rank-3 { color: #ff8000; } /* Orange */
+.rank-4 { color: #ffff00; } /* Yellow */
+.rank-5 { color: #00ff00; } /* Green */
+.rank-6 { color: #00ffff; } /* Cyan */
+.rank-7 { color: #0080ff; } /* Blue */
+.rank-default { color: #ffffff; }
+
+.screen-footer {
+  margin-top: auto;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  font-family: 'Press Start 2P';
+  font-size: 1rem;
+}
+
+.blink {
+  animation: blink-anim 4s infinite;
+}
+
+@keyframes blink-anim { 50% { opacity: 0; } }

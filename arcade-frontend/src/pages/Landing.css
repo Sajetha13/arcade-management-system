@@ -1,0 +1,112 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+.landing-container {
+  background-color: #1a1a1a;
+  color: white;
+  font-family: 'Press Start 2P', cursive;
+  min-height: 200vh; /* Extra height for scrolling */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* The Arcade Machine Frame */
+.arcade-cabinet {
+  width: 450px;
+  height: 700px;
+  background: #8b0000; /* Dark Red Frame */
+  border: 10px solid #222;
+  border-radius: 20px 20px 0 0;
+  margin-top: 50px;
+  position: relative;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+  display: flex;
+  flex-direction: column;
+}
+
+/* The Title Marquee (Like "Love Defender") */
+.marquee {
+  height: 100px;
+  background: linear-gradient(to bottom, #ff00ff, #800080);
+  border: 5px solid #000;
+  margin: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  box-shadow: inset 0 0 15px #fff;
+}
+
+.marquee h1 {
+  font-size: 1.5rem;
+  color: #ffff00;
+  text-shadow: 3px 3px #ff0000;
+}
+
+/* The CRT Screen Area */
+.screen {
+  flex-grow: 1;
+  background: #000;
+  margin: 20px;
+  border-radius: 15px;
+  border: 8px solid #333;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* CRT Scanline Effect */
+.screen::after {
+  content: " ";
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%),
+              linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+  background-size: 100% 4px, 3px 100%;
+  pointer-events: none;
+}
+
+.btn-insert-coin {
+  background: #39FF14; /* Neon Green */
+  color: #000;
+  border: none;
+  padding: 15px 25px;
+  font-family: 'Press Start 2P', cursive;
+  margin: 10px;
+  cursor: pointer;
+  animation: blink 1s infinite;
+}
+
+.btn-join {
+  background: transparent;
+  color: #00ffff;
+  border: 2px solid #00ffff;
+  padding: 10px 20px;
+  font-family: 'Press Start 2P', cursive;
+  margin: 10px;
+  cursor: pointer;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+/* Scrollable Content */
+.about-section {
+  margin-top: 200px;
+  max-width: 800px;
+  padding: 40px;
+  text-align: center;
+  background: #000;
+  border: 4px solid #39FF14;
+}
+
+.footer {
+  margin-top: 50px;
+  padding: 20px;
+  font-size: 0.7rem;
+  color: #666;
+}
